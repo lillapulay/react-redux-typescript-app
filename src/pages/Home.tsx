@@ -5,7 +5,15 @@ import { Link } from 'react-router-dom'
 import { Product, AppState } from '../types'
 import { addProduct, removeProduct } from '../redux/actions'
 
-const names = ['Apple', 'Orange', 'Avocado', 'Banana', 'Cucumber', 'Carrot']
+const names = [
+  'Apple',
+  'Orange',
+  'Avocado',
+  'Banana',
+  'Cucumber',
+  'Carrot',
+  'Watermelon',
+]
 
 export default function Home() {
   const dispatch = useDispatch()
