@@ -10,6 +10,10 @@ const initState: AppState = {
   product: {
     inCart: [],
   },
+  country: {
+    allCountries: [],
+    addedCountries: [],
+  },
 }
 
 export default function makeStore(initialState = initState) {
