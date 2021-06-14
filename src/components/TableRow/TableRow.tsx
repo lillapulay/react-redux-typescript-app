@@ -1,6 +1,6 @@
 import React from "react";
 import Flag from "../Flag/Flag";
-import {Country} from "../../types";
+import { Country } from "../../types";
 import { AddCountry } from "../../redux/actions";
 import { useDispatch } from "react-redux";
 
@@ -19,7 +19,12 @@ function TableRow({country}: TableRowProps) {
       <td>{country.languages?.map(
         lang => lang.name).join(", ")}</td>
       <td>{country.region}</td>
-      <td><button onClick={() => dispatch(AddCountry(country))}> Add Country </button></td>
+      <td>
+        <button 
+        onClick={() => dispatch(AddCountry(country))}> 
+        Add Country 
+        </button>
+      </td>
     </tr>
   );
 }

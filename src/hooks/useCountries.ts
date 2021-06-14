@@ -1,12 +1,12 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCountries } from "../redux/actions";
-import {AppState, Country} from "../types";
+import { AppState, Country } from "../types";
 
 export default function useCountries(keyword: string): [Country[]] {
   const [ filteredCountries, setFilteredCountries ] = useState<Country[]>([]);
   const dispatch = useDispatch()
-  const {allCountries} = useSelector((state: AppState) => state.country)
+  const { allCountries } = useSelector((state: AppState) => state.country)
 
   useEffect(() => {
     dispatch(fetchCountries())

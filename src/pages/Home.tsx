@@ -10,7 +10,6 @@ export default function Home() {
   const [countries] = useCountries(keyword)
 
   const {addedCountries} = useSelector((state: AppState) => state.country)
-  console.log(addedCountries);
 
   return (
     <>

@@ -1,17 +1,34 @@
 import React from 'react'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { RemoveCountry } from '../../redux/actions/country';
 import { AppState } from '../../types';
+import Flag from '../Flag/Flag';
 
 export default function Cart() {
+    const dispatch = useDispatch()
     const {addedCountries} = useSelector((state: AppState) => state.country)
-    console.log(addedCountries, 'from cart');
     const counter = addedCountries.length;
+    
     return (
-        <div>
-            <p> In Cart: {counter}</p>
-            {addedCountries.map((added) => 
-                <p>{added.name}</p>
+        <>
+            {addedCountries.length === 0 ? (
+                <p>The cart is empty.</p>
+            ) : (
+                <p> In Cart: {counter}</p>
             )}
-        </div>
+            
+            <ul>
+                {addedCountries.map((added) => 
+                    <li key="added.name">
+                        <Flag flagUrl={added.flag} />
+                        {added.name}
+                        <button 
+                        onClick={() => dispatch(RemoveCountry(added))}>
+                            Remove
+                        </button>
+                    </li>
+                )}
+            </ul>
+        </>
     )
 }
