@@ -13,15 +13,11 @@ export default function useCountries(keyword: string): [Country[]] {
   }, [dispatch]);
 
   useEffect(()=> {
-      let filteredData = allCountries.filter((country) => { // Make Country optional if throws error
-        return (country.name
-        .toLowerCase()
-        .search(keyword
-          .toLowerCase()) !== -1 || 
-          country.nativeName
-          ?.toLowerCase()
-          .search(keyword
-            .toLowerCase()) !== -1);
+      let filteredData = allCountries.filter((country) => { // Make Country optional if it throws an error
+        return (
+          country.name.toLowerCase().search(keyword.toLowerCase()) !== -1 
+          || 
+          country.nativeName?.toLowerCase().search(keyword.toLowerCase()) !== -1);
       });
       setFilteredCountries(filteredData);
   }, [allCountries, keyword]);

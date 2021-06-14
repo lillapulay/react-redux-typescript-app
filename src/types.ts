@@ -2,6 +2,8 @@
 export const ADD_PRODUCT = 'ADD_PRODUCT'
 export const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 export const SET_COUNTRIES = 'SET_COUNTRIES'
+export const ADD_COUNTRY = 'ADD_COUNTRY'
+export const REMOVE_COUNTRY = 'REMOVE_COUNTRY'
 
 // Country
 type Languages = {
@@ -16,6 +18,20 @@ export type Country = {
   population: number
   region: string
   nativeName?: string
+}
+
+export type AddCountryAction = {
+  type: typeof ADD_COUNTRY
+  payload: {
+    country: Country
+  }
+}
+
+export type RemoveCountryAction = {
+  type: typeof REMOVE_COUNTRY
+  payload: {
+    country: Country
+  }
 }
 
 export type SetCountriesAction = {
@@ -49,7 +65,7 @@ export type RemoveProductAction = {
 // Use this union in reducer
 export type ProductActions = AddProductAction | RemoveProductAction
 
-export type CountryActions = SetCountriesAction
+export type CountryActions = SetCountriesAction | AddCountryAction | RemoveCountryAction
 
 export type ProductState = {
   inCart: Product[]

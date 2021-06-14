@@ -1,5 +1,14 @@
 import { Dispatch } from 'redux'
-import { SET_COUNTRIES, CountryActions, Country } from './../../types'
+import { SET_COUNTRIES, CountryActions, Country, ADD_COUNTRY } from './../../types'
+
+export function AddCountry(country: Country): CountryActions {
+  return {
+    type: ADD_COUNTRY,
+    payload: {
+      country
+    }
+  }
+}
 
 export function setCountries(country: Country[]): CountryActions {
   return {
