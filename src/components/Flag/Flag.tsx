@@ -1,14 +1,9 @@
-import React from "react";
-import "./flag.css";
+import React from 'react'
+import { FlagProps } from '../../types'
+import './flag.css'
 
-type FlagProps = {
-  flagUrl: string;
+function Flag({ flagUrl }: FlagProps) {
+  return <img className="countryFlag" src={flagUrl} alt="flag" />
 }
 
-function Flag({flagUrl}: FlagProps) {
-  return (
-    <img className="countryFlag" src={flagUrl} alt="flag" />
-  );
-}
-
-export default Flag;
+export default Flag

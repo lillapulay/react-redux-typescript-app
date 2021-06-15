@@ -1,30 +1,23 @@
-import React from "react";
-import TableHeader from "../TableHeader/TableHeader";
-import TableRow from "../TableRow/TableRow";
-import Table from 'react-bootstrap/Table';
-import "./maintable.css";
-import {Country} from "../../types";
+import React from 'react'
+import TableHeader from '../TableHeader/TableHeader'
+import TableRow from '../TableRow/TableRow'
+import Table from 'react-bootstrap/Table'
+import './maintable.css'
+import { MainTableProps } from '../../types'
 
-type MainTableProps = {
-  countries: Country[]
-}
-
-function MainTable({countries}: MainTableProps) {
+function MainTable({ countries }: MainTableProps) {
   return (
     <div className="container">
-    <Table striped bordered hover>
-      <TableHeader />
-      <tbody>
-        {countries.map(country => (
-          <TableRow 
-          key={country.name}
-          country={country}
-          />
-        ))}        
-      </tbody>
-    </Table>
+      <Table striped bordered hover>
+        <TableHeader />
+        <tbody>
+          {countries.map((country) => (
+            <TableRow key={country.name} country={country} />
+          ))}
+        </tbody>
+      </Table>
     </div>
-  );
+  )
 }
 
-export default MainTable;
+export default MainTable

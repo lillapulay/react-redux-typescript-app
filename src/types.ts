@@ -5,7 +5,43 @@ export const REMOVE_COUNTRY = 'REMOVE_COUNTRY'
 
 // Country
 type Languages = {
-  name: string // we only use the name for now
+  name: string
+  nativeName: any // Some might contain symbols - could be a problem?
+  iso639_1: string
+}
+
+// Flag component
+export type FlagProps = {
+  flagUrl: string
+}
+
+// TableRow component
+export type TableRowProps = {
+  country: Country
+}
+
+// MainTable component
+export type MainTableProps = {
+  countries: Country[]
+}
+
+// Details page
+export type NameType = {
+  name: string
+}
+
+type Timezones = {
+  name: string // Doesn't actually have a name key, so I just added name - better solution?
+}
+
+type Borders = {
+  name: string
+}
+
+type Currencies = {
+  name: string
+  code: string
+  symbol: any // Some might contain symbols - could be a problem?
 }
 
 export type Country = {
@@ -16,6 +52,14 @@ export type Country = {
   population: number
   region: string
   nativeName?: string
+  topLevelDomain: string
+  callingCodes: any
+  capital: string
+  subregion: string
+  area: number
+  timezones: Timezones[]
+  borders: Borders[]
+  currencies: Currencies[]
 }
 
 export type AddCountryAction = {
@@ -40,7 +84,10 @@ export type SetCountriesAction = {
 }
 
 // Use this union in reducer
-export type CountryActions = SetCountriesAction | AddCountryAction | RemoveCountryAction
+export type CountryActions =
+  | SetCountriesAction
+  | AddCountryAction
+  | RemoveCountryAction
 
 export type CountryState = {
   allCountries: Country[]
