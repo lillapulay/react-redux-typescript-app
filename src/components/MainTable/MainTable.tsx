@@ -8,7 +8,7 @@ import { MainTableProps } from '../../types'
 function MainTable({ countries }: MainTableProps) {
   return (
     <div className="container">
-      <Table striped bordered hover>
+      <Table striped bordered hover variant="light">
         <TableHeader />
         <tbody>
           {countries.map((country) => (

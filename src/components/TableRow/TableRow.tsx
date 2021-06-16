@@ -4,6 +4,7 @@ import { TableRowProps } from '../../types'
 import { AddCountry } from '../../redux/actions'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 
 function TableRow({ country }: TableRowProps) {
   const dispatch = useDispatch()
@@ -16,13 +17,11 @@ function TableRow({ country }: TableRowProps) {
       <td>
         <Link to={`/details/${country.name}`}>{country.name}</Link>
       </td>
-      <td>{country.population}</td>
+      <td>{country.population.toLocaleString('hu', { useGrouping: true })}</td>
       <td>{country.languages?.map((lang) => lang.name).join(', ')}</td>
       <td>{country.region}</td>
       <td>
-        <button onClick={() => dispatch(AddCountry(country))}>
-          Add Country
-        </button>
+        <Button onClick={() => dispatch(AddCountry(country))}>Add</Button>
       </td>
     </tr>
   )

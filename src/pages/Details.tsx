@@ -1,13 +1,14 @@
-import React from "react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useParams } from "react-router-dom";
-import { fetchCountries } from "../redux/actions";
-import { AppState, NameType } from "../types";
-import "./Details.css";
+import React from 'react'
+import { useEffect } from 'react'
+import { Card, Container, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useParams } from 'react-router-dom'
+import { fetchCountries } from '../redux/actions'
+import { AppState, NameType } from '../types'
+import './Details.css'
 
 export default function Details() {
-  const {name} = useParams<NameType>()
+  const { name } = useParams<NameType>()
   const dispatch = useDispatch()
   const { allCountries } = useSelector((state: AppState) => state.country)
 
@@ -16,36 +17,93 @@ export default function Details() {
   }, [dispatch])
 
   return (
-    <>
-    {allCountries
-      .filter((cntry) => cntry.name === name)
-      .map((country) => {
-        return(
-          <ul key={country.name}>
-            <li>
-              <h2>{country.name}</h2>
-            </li>
-            {country.nativeName !== country.name && 
-              <li><h3><i>"{country.nativeName}"</i></h3></li>
-            }
-            <li>
-              <img alt="Country flag" className="detailsFlag" src={country.flag}></img>
-            </li>
-            <li>Capital: {country.capital}</li>
-            <li>Population: {country.population.toLocaleString('hu', {useGrouping: true})}</li> {/* HU provides spaces instead of commas or dots */}
-            <li>Currency: {country.currencies?.map(curr => `${curr.name} (${curr.code}/${curr.symbol})`).join(", ")}</li> {/* e.g. Bhutan has multiple */}
-            <li>Official language: {country.languages?.map(lang => `${lang.name} (${lang.nativeName}/${lang.iso639_1})`).join(", ")}</li>
-            <li>Region: {country.region}</li>
-            <li>Sub-region: {country.subregion}</li>
-            <li>Area: {country.area === null ? "N/A" : `${country.area.toLocaleString('hu', {useGrouping: true})} km2`}</li> {/* How to include <sup>2</sup>? / US Outlying has empty str */}
-            <li>Bordering countries: {country.borders.length <1 ? "N/A" : country.borders.join(', ')}</li> {/* e.g. Japan has none */}      
-            <li>Timezone: {country.timezones.length > 2 ? `From ${country.timezones[0]} to ${country.timezones[country.timezones.length-1]}` : `${country.timezones.join(', ')}`}</li> {/* Rus Fed has a lot */}
-            <li>Calling code: +{country.callingCodes === "" ? "N/A" : country.callingCodes.join(', ')}</li> {/* Dom. Rep. has several, US Outlying has none */}
-            <li>Domain: {country.topLevelDomain}</li>
-          </ul>
-        )
-      })}
-      <Link to="/">Back to home</Link>
-    </>
+    <Container>
+      {allCountries
+        .filter((cntry) => cntry.name === name)
+        .map((country) => {
+          return (
+            <Card
+              className="card text-center"
+              key={country.name}
+              style={{ width: '50rem' }}
+            >
+              <Card.Img className="cardImg" variant="top" src={country.flag} />
+              <Card.Body>
+                <Card.Title>{country.name}</Card.Title>
+                {country.nativeName !== country.name && (
+                  <Card.Subtitle>{country.nativeName}</Card.Subtitle>
+                )}
+              </Card.Body>
+              <ListGroup className="list-group-flush">
+                <ListGroupItem>Capital: {country.capital}</ListGroupItem>
+                <ListGroupItem>
+                  Population:{' '}
+                  {country.population.toLocaleString('hu', {
+                    useGrouping: true,
+                  })}{' '}
+                  {/* HU provides spaces instead of commas or dots */}
+                </ListGroupItem>
+                <ListGroupItem>
+                  Currency:{' '}
+                  {country.currencies
+                    ?.map(
+                      (curr) => `${curr.name} (${curr.code}/${curr.symbol})`
+                    )
+                    .join(', ')}{' '}
+                  {/* e.g. Bhutan has multiple */}
+                </ListGroupItem>
+                <ListGroupItem>
+                  Official languages:{' '}
+                  {country.languages
+                    ?.map(
+                      (lang) =>
+                        `${lang.name} (${lang.nativeName}/${lang.iso639_1})`
+                    )
+                    .join(', ')}
+                </ListGroupItem>
+                <ListGroupItem>
+                  Region: {country.region}/{country.subregion}
+                </ListGroupItem>
+                <ListGroupItem>
+                  Area:{' '}
+                  {country.area === null
+                    ? 'N/A'
+                    : `${country.area.toLocaleString('hu', {
+                      useGrouping: true,
+                    })} km2`}{' '}
+                  {/* How to include <sup>2</sup>? / US Outlying has empty str */}
+                </ListGroupItem>
+                <ListGroupItem>
+                  Bordering countries:{' '}
+                  {country.borders.length < 1
+                    ? 'N/A'
+                    : country.borders.join(', ')}{' '}
+                  {/* e.g. Japan has none */}
+                </ListGroupItem>
+                <ListGroupItem>
+                  Timezone:{' '}
+                  {country.timezones.length > 2
+                    ? `From ${country.timezones[0]} to ${
+                      country.timezones[country.timezones.length - 1]
+                    }`
+                    : `${country.timezones.join(', ')}`}{' '}
+                  {/* Rus Fed has a lot */}
+                </ListGroupItem>
+                <ListGroupItem>
+                  Calling code: +
+                  {country.callingCodes === ''
+                    ? 'N/A'
+                    : country.callingCodes.join(', ')}{' '}
+                  {/* Dom. Rep. has several, US Outlying has none */}
+                </ListGroupItem>
+                <ListGroupItem>Domain: {country.topLevelDomain}</ListGroupItem>
+              </ListGroup>
+              <Card.Body>
+                <Link to="/">Back</Link>
+              </Card.Body>
+            </Card>
+          )
+        })}
+    </Container>
   )
 }

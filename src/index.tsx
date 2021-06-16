@@ -5,6 +5,8 @@ import { BrowserRouter as Router } from 'react-router-dom'
 
 import App from './App'
 import makeStore from './redux/store'
+import 'bootstrap/dist/css/bootstrap.css'
+import './index.css'
 
 const store = makeStore()
 
@@ -17,4 +19,3 @@ const WithProvider = () => (
 )
 
 ReactDOM.render(<WithProvider />, document.getElementById('root'))
-

@@ -10,6 +10,13 @@ type Languages = {
   iso639_1: string
 }
 
+// SearchBar component
+export type SearchBarProps = {
+  keyword: string
+  // Event handlers always return void
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
+
 // Flag component
 export type FlagProps = {
   flagUrl: string

@@ -1,8 +1,9 @@
-.detailsFlag {
-    height: 30px;
-    width: auto;
+.card {
+    margin: 2rem auto;
 }
 
-ul {
-    list-style-type: none;
+.cardImg {
+    max-width: 25rem;
+    margin: auto;
+    padding-top: 1rem;
 }

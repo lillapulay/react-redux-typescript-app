@@ -1,6 +1,11 @@
-import React from "react";
+import React from 'react'
+import { useSelector } from 'react-redux'
+import { AppState } from '../../types'
+import './tableheader.css'
 
 function TableHeader() {
+  const { addedCountries } = useSelector((state: AppState) => state.country)
+  const counter = addedCountries.length
   return (
     <thead>
       <tr>
@@ -9,9 +14,10 @@ function TableHeader() {
         <th>Population</th>
         <th>Languages</th>
         <th>Region</th>
+        <th>Cart: {counter}</th>
       </tr>
     </thead>
-  );
+  )
 }
 
-export default TableHeader;
+export default TableHeader
