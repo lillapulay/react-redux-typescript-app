@@ -18,6 +18,9 @@ export default function Details() {
 
   return (
     <Container>
+      <Container className="titleContainer">
+        <h2>Details</h2>
+      </Container>
       {allCountries
         .filter((cntry) => cntry.name === name)
         .map((country) => {

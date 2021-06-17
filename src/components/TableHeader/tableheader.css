@@ -2,3 +2,7 @@ thead {
   text-align: center;
   vertical-align: middle;
 }
+
+td {
+  background-color: red;
+}

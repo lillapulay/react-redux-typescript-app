@@ -1,10 +1,12 @@
 import React, { useState } from 'react'
-import { Button, Spinner } from 'react-bootstrap'
+import { Button, Container, Spinner } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import Intro from '../components/Intro/Intro'
 import MainTable from '../components/MainTable/MainTable'
 import SearchBar from '../components/SearchBar/SearchBar'
 import useCountries from '../hooks/useCountries'
+
+import './Home.css';
 
 export default function Home() {
   const [keyword, setKeyword] = useState('')
@@ -16,13 +18,18 @@ export default function Home() {
 
   return (
     <>
-      <Intro />
-      <SearchBar keyword={keyword} handleChange={handleChange} />
-      <Link to="/cart">
-        <Button>View cart</Button>
-      </Link>
-      {countries.length === 0 ? (
-        <Spinner animation="border" role="status" />
+      <Container>
+        <Intro />
+        <SearchBar keyword={keyword} handleChange={handleChange} />        
+        <button className="cartButton"><Link to="/cart">View cart</Link></button>        
+      </Container>
+      
+      {/* Needs fix - doesn't trigger */}
+      {!countries ? (
+        <Container className="loadingContainer">
+          <Spinner animation="border" role="status" />
+          <p id="loadingText">Loading...</p>
+        </Container>
       ) : (
         <MainTable countries={countries} />
       )}

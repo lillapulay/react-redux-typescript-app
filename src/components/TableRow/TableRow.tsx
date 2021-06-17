@@ -15,7 +15,7 @@ function TableRow({ country }: TableRowProps) {
         <Flag flagUrl={country.flag} />
       </td>
       <td>
-        <Link to={`/details/${country.name}`}>{country.name}</Link>
+        <Link to={`/details/${country.name}`} style={{color: "black", fontWeight: "bold", textDecoration: "none"}}>{country.name}</Link>
       </td>
       <td>{country.population.toLocaleString('hu', { useGrouping: true })}</td>
       <td>{country.languages?.map((lang) => lang.name).join(', ')}</td>

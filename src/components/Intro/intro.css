@@ -1,0 +1,8 @@
+div.introCard {
+    background-color: white;
+    border-radius: 20px;
+    margin: 3rem auto;
+    box-shadow: 10px 10px 30px inset rgb(148, 99, 25);
+    padding: 1rem 0;
+    width: 25rem;
+}

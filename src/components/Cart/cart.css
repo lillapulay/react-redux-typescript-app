@@ -1,0 +1,22 @@
+div.cartWrapper {
+    background: white;
+    margin: 2em auto;
+    border-radius: 20px;
+    text-align: center;
+    width: 25rem;
+    padding: 2rem 0;
+    box-shadow: 2px 2px 30px rgb(77, 37, 4);
+}
+
+div.cartCard {
+    border-radius: 0;
+    padding-top: 0;
+    border: none;
+    box-shadow: 2px 2px 30px inset rgb(77, 37, 4);
+    border-radius: 20px;
+}
+
+/* Needs fix - don't target other components */
+img {
+    border-radius: 20px 20px 0 0 !important;
+}
