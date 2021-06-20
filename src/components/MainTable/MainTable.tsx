@@ -1,10 +1,11 @@
 import React from 'react'
+
+import { Container } from 'react-bootstrap'
+
+import Table from 'react-bootstrap/Table'
 import TableHeader from '../TableHeader/TableHeader'
 import TableRow from '../TableRow/TableRow'
-import Table from 'react-bootstrap/Table'
-import './maintable.css'
 import { MainTableProps } from '../../types'
-import { Container } from 'react-bootstrap'
 
 function MainTable({ countries }: MainTableProps) {
   return (

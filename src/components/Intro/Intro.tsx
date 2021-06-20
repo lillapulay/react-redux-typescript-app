@@ -1,8 +1,6 @@
 import React from 'react'
-import Button from 'react-bootstrap/Button'
-import { Link } from 'react-router-dom'
-import { Card, Container } from 'react-bootstrap'
-import './intro.css'
+
+import { Container } from 'react-bootstrap'
 
 export default function Intro() {
   return (

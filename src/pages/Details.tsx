@@ -1,11 +1,12 @@
 import React from 'react'
 import { useEffect } from 'react'
-import { Card, Container, ListGroup, ListGroupItem } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useParams } from 'react-router-dom'
+
+import { Card, Container, ListGroup, ListGroupItem } from 'react-bootstrap'
+
 import { fetchCountries } from '../redux/actions'
 import { AppState, NameType } from '../types'
-import './Details.css'
 
 export default function Details() {
   const { name } = useParams<NameType>()
@@ -21,6 +22,7 @@ export default function Details() {
       <Container className="titleContainer">
         <h2>Details</h2>
       </Container>
+
       {allCountries
         .filter((cntry) => cntry.name === name)
         .map((country) => {
@@ -28,35 +30,43 @@ export default function Details() {
             <Card
               className="card text-center"
               key={country.name}
-              style={{ width: '50rem' }}
+              style={{ width: '30rem' }}
             >
               <Card.Img className="cardImg" variant="top" src={country.flag} />
+
               <Card.Body>
                 <Card.Title>{country.name}</Card.Title>
                 {country.nativeName !== country.name && (
                   <Card.Subtitle>{country.nativeName}</Card.Subtitle>
                 )}
               </Card.Body>
+
               <ListGroup className="list-group-flush">
-                <ListGroupItem>Capital: {country.capital}</ListGroupItem>
                 <ListGroupItem>
-                  Population:{' '}
+                  Capital:
+                  {country.capital}
+                </ListGroupItem>
+
+                {/* HU provides spaces instead of commas or dots */}
+                <ListGroupItem>
+                  Population:
                   {country.population.toLocaleString('hu', {
                     useGrouping: true,
-                  })}{' '}
-                  {/* HU provides spaces instead of commas or dots */}
+                  })}
                 </ListGroupItem>
+
+                {/* e.g. Bhutan has multiple */}
                 <ListGroupItem>
-                  Currency:{' '}
+                  Currency:
                   {country.currencies
                     ?.map(
                       (curr) => `${curr.name} (${curr.code}/${curr.symbol})`
                     )
-                    .join(', ')}{' '}
-                  {/* e.g. Bhutan has multiple */}
+                    .join(', ')}
                 </ListGroupItem>
+
                 <ListGroupItem>
-                  Official languages:{' '}
+                  Official languages:
                   {country.languages
                     ?.map(
                       (lang) =>
@@ -64,49 +74,62 @@ export default function Details() {
                     )
                     .join(', ')}
                 </ListGroupItem>
+
                 <ListGroupItem>
                   Region: {country.region}/{country.subregion}
                 </ListGroupItem>
+
+                {/* How to include <sup>2</sup> to show square kilometers? 
+                Tried making it into a component even, but only returned [object Object]
+                -----
+                US Outlying has empty str */}
                 <ListGroupItem>
-                  Area:{' '}
+                  Area:
                   {country.area === null
                     ? 'N/A'
                     : `${country.area.toLocaleString('hu', {
                       useGrouping: true,
-                    })} km2`}{' '}
-                  {/* How to include <sup>2</sup>? / US Outlying has empty str */}
+                    })} km2`}
                 </ListGroupItem>
+
+                {/* e.g. Japan has none */}
                 <ListGroupItem>
-                  Bordering countries:{' '}
+                  Bordering countries:
                   {country.borders.length < 1
                     ? 'N/A'
-                    : country.borders.join(', ')}{' '}
-                  {/* e.g. Japan has none */}
+                    : country.borders.join(', ')}
                 </ListGroupItem>
+
+                {/* Rus Fed has a lot */}
                 <ListGroupItem>
-                  Timezone:{' '}
+                  Timezone:
                   {country.timezones.length > 2
                     ? `From ${country.timezones[0]} to ${
                       country.timezones[country.timezones.length - 1]
                     }`
-                    : `${country.timezones.join(', ')}`}{' '}
-                  {/* Rus Fed has a lot */}
+                    : `${country.timezones.join(', ')}`}
                 </ListGroupItem>
+
+                {/* Dom. Rep. has several, US Outlying has none */}
                 <ListGroupItem>
                   Calling code: +
                   {country.callingCodes === ''
                     ? 'N/A'
-                    : country.callingCodes.join(', ')}{' '}
-                  {/* Dom. Rep. has several, US Outlying has none */}
+                    : country.callingCodes.join(', ')}
                 </ListGroupItem>
-                <ListGroupItem>Domain: {country.topLevelDomain}</ListGroupItem>
+
+                <ListGroupItem>
+                  Domain:
+                  {country.topLevelDomain}
+                </ListGroupItem>
               </ListGroup>
-              <Card.Body>
-                <Link to="/">Back</Link>
-              </Card.Body>
             </Card>
           )
         })}
+
+      <button className="backButton">
+        <Link to="/">Back</Link>
+      </button>
     </Container>
   )
 }
