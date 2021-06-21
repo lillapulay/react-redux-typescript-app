@@ -9,8 +9,6 @@ export default function ThemeButton() {
     const bgUrl = theme.backgroundImage.toString()
 
     document.body.style.backgroundImage = `${bgUrl}`
-    console.log(bgUrl)
-    //document.querySelectorAll('button')
   }
 
   /* Temporary */
