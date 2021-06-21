@@ -7,6 +7,7 @@ import { Card, Container, ListGroup, ListGroupItem } from 'react-bootstrap'
 
 import { fetchCountries } from '../redux/actions'
 import { AppState, NameType } from '../types'
+import ThemeButton from '../components/ThemeButton/ThemeButton'
 
 export default function Details() {
   const { name } = useParams<NameType>()
@@ -19,6 +20,7 @@ export default function Details() {
 
   return (
     <Container>
+      <ThemeButton />
       <Container className="titleContainer">
         <h2>Details</h2>
       </Container>

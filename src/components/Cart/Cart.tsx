@@ -6,6 +6,7 @@ import { Row, Col, Card, Container } from 'react-bootstrap'
 
 import { RemoveCountry } from '../../redux/actions/country'
 import { AppState } from '../../types'
+import ThemeButton from '../ThemeButton/ThemeButton'
 
 export default function Cart() {
   const dispatch = useDispatch()
@@ -14,6 +15,7 @@ export default function Cart() {
 
   return (
     <Container>
+      <ThemeButton />
       <Container className="cartWrapper">
         <h1>Cart</h1>
         {addedCountries.length === 0 ? (
@@ -29,9 +31,8 @@ export default function Cart() {
 
       <Row xs={1} md={2} className="g-4">
         {addedCountries.map((added) => (
-          <Col>
+          <Col key={added.name}>
             <Card
-              key={added.name}
               className="cartCard card text-center"
               style={{ width: '20rem', height: '85%' }}
             >

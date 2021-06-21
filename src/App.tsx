@@ -4,7 +4,7 @@ import { ThemeContext, Theme } from './ThemeContext'
 import Routes from './Routes'
 
 export default function App() {
-  const [theme, setTheme] = React.useState(Theme.Light)
+  const [theme, setTheme] = React.useState(Theme.sepia)
 
   return (
     /* Article wrapped the App component with the provider, 
@@ -12,7 +12,7 @@ export default function App() {
     The entire app is re-rendered if the values in the theme context change,
     so variables shouldn't change too frequently */
     <ThemeContext.Provider value={{ theme, setTheme }}>
-      <Routes />
+        <Routes />
     </ThemeContext.Provider>
   )
 }

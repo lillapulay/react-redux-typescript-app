@@ -18,8 +18,8 @@ body {
   
   /* Background image */
   height: 100vh;
-  background-color: rgba(255, 166, 0, 0.432);
-  background-image: url('./background.jpg');
+  /*background-color: rgba(255, 166, 0, 0.432);*/
+  /*background-image: url('./background.jpg');*/
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
@@ -39,6 +39,10 @@ body::-webkit-scrollbar-thumb {
   background-color: rgb(173, 100, 51);    /* Color of the scroll thumb */
   border-radius: 20px;       /* Roundness of the scroll thumb */
   border: 2px solid rgb(255, 166, 0);  /* Creates padding around scroll thumb */
+}
+
+div#root {
+  padding-bottom: 1rem;
 }
 
 /* General styling */
@@ -75,8 +79,13 @@ a:visited {
 /* Switch button */
 .themeButton {
   position: absolute;
+  font-size: 12px;
   top: 1.5rem;
   right: 2rem;
+  height: 3rem;
+  width: 3rem;
+  padding: 0.5rem 0.25rem;
+  border-radius: 50%;
 }
 
 /* Intro section */
@@ -240,7 +249,7 @@ div.list-group-item {
 }
 
 .backButton {
-  margin-bottom: 2rem;
+  margin-bottom: 2em;
 }
 
  button a{
