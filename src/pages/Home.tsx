@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import * as React from 'react'
 import { Link } from 'react-router-dom'
 
 import { Container, Spinner } from 'react-bootstrap'
@@ -8,9 +8,10 @@ import MainTable from '../components/MainTable/MainTable'
 import SearchBar from '../components/SearchBar/SearchBar'
 import useCountries from '../hooks/useCountries'
 import Sad from './../sad.png'
+import ThemeButton from '../components/ThemeButton/ThemeButton'
 
 export default function Home() {
-  const [keyword, setKeyword] = useState('')
+  const [keyword, setKeyword] = React.useState('')
   const [countries] = useCountries(keyword)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -19,6 +20,8 @@ export default function Home() {
 
   return (
     <Container className="homePage">
+      <ThemeButton />
+
       <Container>
         <Intro />
         <SearchBar keyword={keyword} handleChange={handleChange} />

@@ -15,7 +15,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
   /* Background image */
+  height: 100vh;
   background-color: rgba(255, 166, 0, 0.432);
   background-image: url('./background.jpg');
   background-repeat: no-repeat;
@@ -56,6 +58,11 @@ button:hover {
   box-shadow: 2px 2px 50px rgb(255, 166, 0) inset, 2px 2px 20px rgb(255, 166, 0);
 }
 
+button:active {
+  box-shadow: 2px 2px 50px rgb(206, 67, 12) inset, 2px 2px 20px rgb(206, 67, 12);
+  transition: all 150ms ease-in-out;
+}
+
 a,
 a:hover,
 a:active,
@@ -63,6 +70,13 @@ a:visited {
   text-decoration: none;
   font-size: 16px;
   color: black;
+}
+
+/* Switch button */
+.themeButton {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
 }
 
 /* Intro section */

@@ -42,14 +42,11 @@ export default function Details() {
               </Card.Body>
 
               <ListGroup className="list-group-flush">
-                <ListGroupItem>
-                  Capital:
-                  {country.capital}
-                </ListGroupItem>
+                <ListGroupItem>Capital: {country.capital}</ListGroupItem>
 
                 {/* HU provides spaces instead of commas or dots */}
                 <ListGroupItem>
-                  Population:
+                  Population:{' '}
                   {country.population.toLocaleString('hu', {
                     useGrouping: true,
                   })}
@@ -57,7 +54,7 @@ export default function Details() {
 
                 {/* e.g. Bhutan has multiple */}
                 <ListGroupItem>
-                  Currency:
+                  Currency:{' '}
                   {country.currencies
                     ?.map(
                       (curr) => `${curr.name} (${curr.code}/${curr.symbol})`
@@ -66,7 +63,7 @@ export default function Details() {
                 </ListGroupItem>
 
                 <ListGroupItem>
-                  Official languages:
+                  Official languages:{' '}
                   {country.languages
                     ?.map(
                       (lang) =>
@@ -84,7 +81,7 @@ export default function Details() {
                 -----
                 US Outlying has empty str */}
                 <ListGroupItem>
-                  Area:
+                  Area:{' '}
                   {country.area === null
                     ? 'N/A'
                     : `${country.area.toLocaleString('hu', {
@@ -94,7 +91,7 @@ export default function Details() {
 
                 {/* e.g. Japan has none */}
                 <ListGroupItem>
-                  Bordering countries:
+                  Bordering countries:{' '}
                   {country.borders.length < 1
                     ? 'N/A'
                     : country.borders.join(', ')}
@@ -102,7 +99,7 @@ export default function Details() {
 
                 {/* Rus Fed has a lot */}
                 <ListGroupItem>
-                  Timezone:
+                  Timezone:{' '}
                   {country.timezones.length > 2
                     ? `From ${country.timezones[0]} to ${
                       country.timezones[country.timezones.length - 1]
@@ -112,16 +109,13 @@ export default function Details() {
 
                 {/* Dom. Rep. has several, US Outlying has none */}
                 <ListGroupItem>
-                  Calling code: +
-                  {country.callingCodes === ''
+                  Calling code:{' '}
+                  {country.callingCodes[0] === ''
                     ? 'N/A'
-                    : country.callingCodes.join(', ')}
+                    : `+${country.callingCodes.join(', +')}`}
                 </ListGroupItem>
 
-                <ListGroupItem>
-                  Domain:
-                  {country.topLevelDomain}
-                </ListGroupItem>
+                <ListGroupItem>Domain: {country.topLevelDomain}</ListGroupItem>
               </ListGroup>
             </Card>
           )
