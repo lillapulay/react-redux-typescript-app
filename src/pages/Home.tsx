@@ -1,49 +1,59 @@
-import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import * as React from 'react'
 import { Link } from 'react-router-dom'
 
-import { Product, AppState } from '../types'
-import { addProduct, removeProduct } from '../redux/actions'
+import { Container, Spinner } from 'react-bootstrap'
 
-const names = [
-  'Apple',
-  'Orange',
-  'Avocado',
-  'Banana',
-  'Cucumber',
-  'Carrot',
-  'Watermelon',
-]
+import Intro from '../components/Intro/Intro'
+import MainTable from '../components/MainTable/MainTable'
+import SearchBar from '../components/SearchBar/SearchBar'
+import useCountries from '../hooks/useCountries'
+import Sad from './../sad.png'
+import ThemeButton from '../components/ThemeButton/ThemeButton'
 
 export default function Home() {
-  const dispatch = useDispatch()
-  const products = useSelector((state: AppState) => state.product.inCart)
+  const [keyword, setKeyword] = React.useState('')
+  const [countries] = useCountries(keyword)
 
-  const handleAddProduct = () => {
-    const product: Product = {
-      id: (+new Date()).toString(),
-      name: names[Math.floor(Math.random() * names.length)],
-      price: +(Math.random() * 10).toFixed(2),
-    }
-    dispatch(addProduct(product))
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setKeyword(event.target.value)
   }
 
   return (
-    <>
-      <h1>Home page</h1>
-      {products.length <= 0 && <div>No products in cart</div>}
-      <ul>
-        {products.map((p) => (
-          <li key={p.id}>
-            <Link to={`/products/${p.id}`}>{`${p.name} - $${p.price}`}</Link>
+    <Container className="homePage">
+      <ThemeButton />
 
-            {'  '}
+      <Container>
+        <Intro />
+        <SearchBar keyword={keyword} handleChange={handleChange} />
+        <button className="cartButton">
+          <Link to="/cart">View cart</Link>
+        </button>
+      </Container>
 
-            <button onClick={() => dispatch(removeProduct(p))}>Remove</button>
-          </li>
-        ))}
-      </ul>
-      <button onClick={handleAddProduct}>Add product</button>
-    </>
+      {
+        /* If the API call is still in progress and we haven't searched for anything */
+        countries.length === 0 && keyword === '' ? (
+          <Container className="statusContainer">
+            <Spinner animation="border" role="status" />
+            <p id="statusText">Loading...</p>
+          </Container>
+        ) : /* If we already searched for something but there are no results */
+          countries.length === 0 && keyword !== '' ? (
+            <Container className="statusContainer">
+              <img
+                src={Sad}
+                width="50"
+                height="50"
+                className="sadFace"
+                alt="sad face"
+              ></img>
+              <p id="statusText">No results found.</p>
+            </Container>
+          ) : (
+          /* If 'countries' or 'filteredCountries' exists */
+            countries.length > 0 && <MainTable countries={countries} />
+          )
+      }
+    </Container>
   )
 }
