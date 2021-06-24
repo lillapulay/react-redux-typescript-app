@@ -14,9 +14,9 @@ export default function Cart() {
   const counter = addedCountries.length
 
   return (
-    <Container>
+    <Container className="cartContainer">
       <ThemeButton />
-      <Container className="cartWrapper">
+      <Container className="cartHeader">
         <h1>Cart</h1>
         {addedCountries.length === 0 ? (
           <p>The cart is empty.</p>
@@ -38,16 +38,28 @@ export default function Cart() {
             >
               <Card.Img className="cartImg" variant="top" src={added.flag} />
               <Card.Body>
-                <Card.Title>{added.name}</Card.Title>
+                <Card.Title>
+                  <Link
+                    to={`/details/${added.name}`}
+                    style={{
+                      color: 'black',
+                      fontWeight: 'bold',
+                      textDecoration: 'none',
+                    }}
+                  >
+                    {added.name}
+                  </Link>
+                </Card.Title>
                 <Card.Text>Capital: {added.capital}</Card.Text>
-                <button
-                  className="removeButton"
-                  onClick={() => dispatch(RemoveCountry(added))}
-                >
-                  Remove
-                </button>
               </Card.Body>
             </Card>
+
+            <button
+              className="removeButton"
+              onClick={() => dispatch(RemoveCountry(added))}
+            >
+              Remove
+            </button>
           </Col>
         ))}
       </Row>

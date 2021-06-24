@@ -48,7 +48,7 @@ div#root {
 /* General styling */
 button {
   padding: 0.5rem 1rem;
-  border: 0.5px solid rgb(224, 127, 1);
+  border: 1px solid rgb(224, 127, 1);
   color: black;
   border-radius: 20px;
   margin: auto;
@@ -65,6 +65,14 @@ button:hover {
 button:active {
   box-shadow: 2px 2px 50px rgb(206, 67, 12) inset, 2px 2px 20px rgb(206, 67, 12);
   transition: all 150ms ease-in-out;
+}
+
+button:disabled {
+  opacity: 0.5;
+  transition: all 1.5s ease-in-out;
+  box-shadow: unset;
+  color: white;
+  background-color: rgb(77, 39, 4);
 }
 
 a,
@@ -121,7 +129,11 @@ div.introCard {
 }
 
 /* Cart component */
-div.cartWrapper {
+div.cartContainer {
+  padding-bottom: 3.5rem;
+}
+
+div.cartHeader {
   background: white;
   margin: 2em auto;
   border-radius: 20px;
@@ -193,6 +205,15 @@ tr:last-child {
   border-bottom: 5px solid #eb9b08;
 }
 
+.addButton {  
+  width: 5rem;
+  padding: 0.5rem;
+}
+
+button.addButton.detailsAdd {
+  margin: 0.5rem auto;
+}
+
 /* Home */
 .homePage {
   min-height: 100vh;
@@ -231,7 +252,7 @@ div.titleContainer {
 }
 
 div.card {
-  margin: 3rem auto;
+  margin: 1.5rem auto;
   border-radius: 20px;
   border: none;
   box-shadow: var(--shadow);
@@ -249,7 +270,7 @@ div.list-group-item {
 }
 
 .backButton {
-  margin-bottom: 2em;
+  margin: 1.5em auto;
 }
 
  button a{

@@ -1,13 +1,16 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import Flag from '../Flag/Flag'
-import { TableRowProps } from '../../types'
-import { AddCountry } from '../../redux/actions'
+import { AppState, TableRowProps } from '../../types'
+import { AddCountry, RemoveCountry } from '../../redux/actions'
 
 function TableRow({ country }: TableRowProps) {
   const dispatch = useDispatch()
+  const addedCountries = useSelector(
+    (state: AppState) => state.country.addedCountries
+  )
 
   return (
     <tr>
@@ -28,9 +31,17 @@ function TableRow({ country }: TableRowProps) {
       <td>
         <button
           className="addButton"
-          onClick={() => dispatch(AddCountry(country))}
+          /* disabled={Boolean(addedCountries.find(cnt => cnt.name === country.name))} */
+          /* onClick={() => dispatch(AddCountry(country))} */
+          onClick={() => {
+            !addedCountries.find((cnt) => cnt.name === country.name)
+              ? dispatch(AddCountry(country))
+              : dispatch(RemoveCountry(country))
+          }}
         >
-          Add
+          {addedCountries.find((cnt) => cnt.name === country.name)
+            ? 'Remove'
+            : 'Add'}
         </button>
       </td>
     </tr>

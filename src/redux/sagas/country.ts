@@ -1,9 +1,10 @@
-import { takeLatest } from 'redux-saga/effects'
+import { takeLatest, select } from 'redux-saga/effects'
+import { AppState } from '../../types'
 
-import { ADD_COUNTRY, AddCountryAction } from '../../types'
-
-function* doSomethingWhenAddingCountry(action: AddCountryAction) {
-  yield console.log(action)
+/* Saves the added countries to the localStorage */
+function* saveLocalState() {
+  const state: AppState = yield select()
+  yield localStorage.setItem('state', JSON.stringify(state))
 }
 
-export default [takeLatest(ADD_COUNTRY, doSomethingWhenAddingCountry)]
+export default [takeLatest('*', saveLocalState)]
