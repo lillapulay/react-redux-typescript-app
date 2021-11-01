@@ -17,12 +17,18 @@ export default function useCountries(keyword: string): [Country[]] {
     let filteredData = allCountries.filter((country) => {
       // Make Country optional if it throws an error
       return (
-        country.name.toLowerCase().search(keyword.toLowerCase()) !== -1 ||
-        country.nativeName?.toLowerCase().search(keyword.toLowerCase()) !== -1
+        country.name.common.toLowerCase().search(keyword.toLowerCase()) !==
+        -1 /* ||
+        country.name.nativeName?.eng.official
+          .toLowerCase()
+          .search(keyword.toLowerCase()) !== -1 */
+        //country //&& console.log(country.name.common)
       )
     })
     setFilteredCountries(filteredData)
+    // console.log(filteredData)
   }, [allCountries, keyword])
 
+  // console.log(filteredCountries)
   return [filteredCountries]
 }

@@ -31,26 +31,30 @@ export default function Cart() {
 
       <Row xs={1} md={2} className="g-4">
         {addedCountries.map((added) => (
-          <Col key={added.name}>
+          <Col key={added.name.common}>
             <Card
               className="cartCard card text-center"
               style={{ width: '20rem', height: '85%' }}
             >
-              <Card.Img className="cartImg" variant="top" src={added.flag} />
+              <Card.Img
+                className="cartImg"
+                variant="top"
+                src={added.flags.png}
+              />
               <Card.Body>
                 <Card.Title>
                   <Link
-                    to={`/details/${added.name}`}
+                    to={`/details/${added.name.common}`}
                     style={{
                       color: 'black',
                       fontWeight: 'bold',
                       textDecoration: 'none',
                     }}
                   >
-                    {added.name}
+                    {added.name.common}
                   </Link>
                 </Card.Title>
-                <Card.Text>Capital: {added.capital}</Card.Text>
+                <Card.Text>Capital: {added.capital.join(', ')}</Card.Text>
               </Card.Body>
             </Card>
 

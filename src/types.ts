@@ -51,17 +51,23 @@ type Currencies = {
   symbol: any // Some might contain symbols - could be a problem?
 }
 
+/* Needs update */
+interface NativeName {
+  key: string
+  value: string
+}
+
 export type Country = {
   // Needs to match API property names
-  flag: string
-  name: string
+  flags: { png: string }
+  name: { common: string; nativeName: any } // Needs update
   languages: Languages[] // Array of objects
   population: number
   region: string
   nativeName?: string
   topLevelDomain: string
   callingCodes: any
-  capital: string
+  capital: string[]
   subregion: string
   area: number
   timezones: Timezones[]

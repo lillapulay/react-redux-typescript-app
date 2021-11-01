@@ -36,10 +36,10 @@ export default function Details() {
       </Container>
 
       {allCountries
-        .filter((cntry) => cntry.name === name)
+        .filter((cntry) => cntry.name.common === name)
         .map((country) => {
           return (
-            <Container key={country.name}>
+            <Container key={country.name.common}>
               <Card
                 className="detailsCard card text-center"
                 style={{ width: '30rem' }}
@@ -47,38 +47,47 @@ export default function Details() {
                 <Card.Img
                   className="cardImg"
                   variant="top"
-                  src={country.flag}
+                  src={country.flags.png}
                 />
 
                 <Card.Body>
-                  <Card.Title>{country.name}</Card.Title>
-                  {country.nativeName !== country.name && (
+                  <Card.Title>{country.name.common}</Card.Title>
+                  {/* API structure is messy/random - will think about it 
+                  Make an array with the values only and map through it? 
+                  Also for search function?*/}
+                  {/* {country.nativeName !== country.name && (
                     <Card.Subtitle>{country.nativeName}</Card.Subtitle>
-                  )}
+                  )} */}
                 </Card.Body>
 
                 <ListGroup className="list-group-flush">
-                  <ListGroupItem>Capital: {country.capital}</ListGroupItem>
+                  {/* <ListGroupItem>Capital: {country.capital[0]}</ListGroupItem> */}
+                  <ListGroupItem>
+                    Capital:{' '}
+                    {country.capital.length > 1
+                      ? country.capital.join(', ')
+                      : country.capital}
+                  </ListGroupItem>
 
                   {/* HU provides spaces instead of commas or dots */}
-                  <ListGroupItem>
+                  {/* <ListGroupItem>
                     Population:{' '}
                     {country.population.toLocaleString('hu', {
                       useGrouping: true,
                     })}
-                  </ListGroupItem>
+                  </ListGroupItem> */}
 
                   {/* e.g. Bhutan has multiple */}
-                  <ListGroupItem>
+                  {/* <ListGroupItem>
                     Currency:{' '}
                     {country.currencies
                       ?.map(
                         (curr) => `${curr.name} (${curr.code}/${curr.symbol})`
                       )
                       .join(', ')}
-                  </ListGroupItem>
+                  </ListGroupItem> */}
 
-                  <ListGroupItem>
+                  {/* <ListGroupItem>
                     Official languages:{' '}
                     {country.languages
                       ?.map(
@@ -86,54 +95,54 @@ export default function Details() {
                           `${lang.name} (${lang.nativeName}/${lang.iso639_1})`
                       )
                       .join(', ')}
-                  </ListGroupItem>
+                  </ListGroupItem> */}
 
-                  <ListGroupItem>
+                  {/* <ListGroupItem>
                     Region: {country.region}/{country.subregion}
-                  </ListGroupItem>
+                  </ListGroupItem> */}
 
                   {/* How to include <sup>2</sup> to show square kilometers? 
                   Tried making it into a component even, but only returned [object Object]
                   -----
                   US Outlying has empty str */}
-                  <ListGroupItem>
+                  {/* <ListGroupItem>
                     Area:{' '}
                     {country.area === null
                       ? 'N/A'
                       : `${country.area.toLocaleString('hu', {
-                        useGrouping: true,
-                      })} km2`}
-                  </ListGroupItem>
+                          useGrouping: true,
+                        })} km2`}
+                  </ListGroupItem> */}
 
                   {/* e.g. Japan has none */}
-                  <ListGroupItem>
+                  {/* <ListGroupItem>
                     Bordering countries:{' '}
                     {country.borders.length < 1
                       ? 'N/A'
                       : country.borders.join(', ')}
-                  </ListGroupItem>
+                  </ListGroupItem> */}
 
                   {/* Rus Fed has a lot */}
-                  <ListGroupItem>
+                  {/* <ListGroupItem>
                     Timezone:{' '}
                     {country.timezones.length > 2
                       ? `From ${country.timezones[0]} to ${
-                        country.timezones[country.timezones.length - 1]
-                      }`
+                          country.timezones[country.timezones.length - 1]
+                        }`
                       : `${country.timezones.join(', ')}`}
-                  </ListGroupItem>
+                  </ListGroupItem> */}
 
                   {/* Dom. Rep. has several, US Outlying has none */}
-                  <ListGroupItem>
+                  {/* <ListGroupItem>
                     Calling code:{' '}
                     {country.callingCodes[0] === ''
                       ? 'N/A'
                       : `+${country.callingCodes.join(', +')}`}
-                  </ListGroupItem>
+                  </ListGroupItem> */}
 
-                  <ListGroupItem>
+                  {/* <ListGroupItem>
                     Domain: {country.topLevelDomain}
-                  </ListGroupItem>
+                  </ListGroupItem> */}
                 </ListGroup>
               </Card>
 
@@ -142,12 +151,16 @@ export default function Details() {
                 /* disabled={Boolean(addedCountries.find(cnt => cnt.name === country.name))} */
                 /* onClick={() => dispatch(AddCountry(country))} */
                 onClick={() => {
-                  !addedCountries.find((cnt) => cnt.name === country.name)
+                  !addedCountries.find(
+                    (cnt) => cnt.name.common === country.name.common
+                  )
                     ? dispatch(AddCountry(country))
                     : dispatch(RemoveCountry(country))
                 }}
               >
-                {addedCountries.find((cnt) => cnt.name === country.name)
+                {addedCountries.find(
+                  (cnt) => cnt.name.common === country.name.common
+                )
                   ? 'Remove'
                   : 'Add'}
               </button>

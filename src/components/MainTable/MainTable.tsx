@@ -14,7 +14,7 @@ function MainTable({ countries }: MainTableProps) {
         <TableHeader />
         <tbody>
           {countries.map((country) => (
-            <TableRow key={country.name} country={country} />
+            <TableRow key={country.name.common} country={country} />
           ))}
         </tbody>
       </Table>

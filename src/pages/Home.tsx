@@ -17,6 +17,7 @@ export default function Home() {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setKeyword(event.target.value)
   }
+  //console.log('from Home', countries)
 
   return (
     <Container className="homePage">
@@ -29,31 +30,31 @@ export default function Home() {
           <Link to="/cart">View cart</Link>
         </button>
       </Container>
+      {/* {console.log(countries.length)} */}
 
-      {
-        /* If the API call is still in progress and we haven't searched for anything */
-        countries.length === 0 && keyword === '' ? (
-          <Container className="statusContainer">
-            <Spinner animation="border" role="status" />
-            <p id="statusText">Loading...</p>
-          </Container>
-        ) : /* If we already searched for something but there are no results */
-          countries.length === 0 && keyword !== '' ? (
-            <Container className="statusContainer">
-              <img
-                src={Sad}
-                width="50"
-                height="50"
-                className="sadFace"
-                alt="sad face"
-              ></img>
-              <p id="statusText">No results found.</p>
-            </Container>
-          ) : (
-          /* If 'countries' or 'filteredCountries' exists */
-            countries.length > 0 && <MainTable countries={countries} />
-          )
-      }
+      {/* {countries.map((country) => (
+        <h1 key={country.name.common}>{country.name.common}</h1>
+      ))} */}
+
+      {countries.length === 0 && keyword === '' ? (
+        <Container className="statusContainer">
+          <Spinner animation="border" role="status" />
+          <p id="statusText">Loading...</p>
+        </Container>
+      ) : countries.length === 0 && keyword !== '' ? (
+        <Container className="statusContainer">
+          <img
+            src={Sad}
+            width="50"
+            height="50"
+            className="sadFace"
+            alt="sad face"
+          ></img>
+          <p id="statusText">No results found.</p>
+        </Container>
+      ) : (
+        countries.length > 0 && <MainTable countries={countries} />
+      )}
     </Container>
   )
 }

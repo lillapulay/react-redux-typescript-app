@@ -15,31 +15,40 @@ function TableRow({ country }: TableRowProps) {
   return (
     <tr>
       <td>
-        <Flag flagUrl={country.flag} />
+        <Flag flagUrl={country.flags.png} />
       </td>
       <td>
         <Link
-          to={`/details/${country.name}`}
+          to={`/details/${country.name.common}`}
           style={{ color: 'black', fontWeight: 'bold', textDecoration: 'none' }}
         >
-          {country.name}
+          {country.name.common}
         </Link>
       </td>
       <td>{country.population.toLocaleString('hu', { useGrouping: true })}</td>
-      <td>{country.languages?.map((lang) => lang.name).join(', ')}</td>
+      {/* <td>
+        {country.languages?.map((lang) => lang.name).join(', ')}}
+        Languages
+      </td> */}
+      <td>
+        {country.languages && Object.values(country.languages).join(', ')}
+      </td>
+      {/* {console.log(country.languages)} */}
+
+      {/* {console.log(country.name.nativeName)} */}
       <td>{country.region}</td>
       <td>
         <button
           className="addButton"
-          /* disabled={Boolean(addedCountries.find(cnt => cnt.name === country.name))} */
-          /* onClick={() => dispatch(AddCountry(country))} */
           onClick={() => {
-            !addedCountries.find((cnt) => cnt.name === country.name)
+            !addedCountries.find(
+              (cnt) => cnt.name.common === country.name.common
+            )
               ? dispatch(AddCountry(country))
               : dispatch(RemoveCountry(country))
           }}
         >
-          {addedCountries.find((cnt) => cnt.name === country.name)
+          {addedCountries.find((cnt) => cnt.name.common === country.name.common)
             ? 'Remove'
             : 'Add'}
         </button>

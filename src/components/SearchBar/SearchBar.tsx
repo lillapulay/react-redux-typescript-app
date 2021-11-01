@@ -17,7 +17,7 @@ function SearchBar({ keyword, handleChange }: SearchBarProps) {
           aria-describedby="inputGroup-sizing-default"
           type="text"
           name="search"
-          placeholder="Enter (native) name..."
+          placeholder="Enter name..."
           value={keyword}
           onChange={handleChange}
         />
